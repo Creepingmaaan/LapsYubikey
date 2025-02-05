@@ -1,5 +1,5 @@
 Clear-Host
-Connect-Entra -Scopes "Device.Read.All" -ContextScope Process -NoWelcome
+Connect-Entra -Scopes "Device.Read.All", "DeviceLocalCredential.Read.All" -ContextScope Process -NoWelcome
 $lapslogo = " 
         .---------------------------------------------.
         |                                             |
