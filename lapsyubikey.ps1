@@ -18,10 +18,11 @@ Clear-Host
  if ($lapsinput -match "@") {
      Write-Host $lapsinput
      $entrauserdeviceid = Get-EntraUserOwnedDevice -UserId "$lapsinput" -All | Select-Object -ExpandProperty Id
+     $entradevicedisplayname = @()
      foreach ($entradevice in $entrauserdeviceid) {
         $entradevicedisplayname+= Get-EntraDevice -DeviceID "$entradevice" | Select-Object -ExpandProperty DisplayName
      }
-     Out-GridView $entradevicedisplayname
+     $lapsinput = ($entradevicedisplayname | Out-GridView -OutputMode Single)
  }
 $lapsdeviceid = Get-entradevice -Filter "DisplayName eq '$lapsinput'" | Select-Object -ExpandProperty DeviceID
 $lapspassword = Get-LapsAADPassword -DeviceIds "$lapsdeviceid" -IncludePasswords -AsPlainText | Select-Object -ExpandProperty Password
